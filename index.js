@@ -14,6 +14,10 @@ const guest2Btn = document.getElementById('guest-2-btn');
 const guest3Btn = document.getElementById('guest-3-btn');
 // reset button
 const resetBtn = document.getElementById('reset-btn');
+// save button
+const saveBtn = document.getElementById('save-btn');
+// previous scores display div
+const prevScores = document.getElementById('prev-scores');
 // css style values
 const red = "#F94F6D";
 const redGlow = "0px 0px 13px rgb(249, 79, 109, 0.7)";
@@ -64,7 +68,7 @@ function add3Guest() {
     checkLeader();
 }
 
-function resetScore() {
+function resetScores() {
     homeScore = 0;
     guestScore = 0;
     homeScoreEl.textContent = homeScore;
@@ -92,6 +96,14 @@ function checkLeader() {
     }
 }
 
+function saveScores() {
+    prevScores.innerHTML += `
+        <div class="saved-game">
+            <p>Home: ${homeScore}</p>
+            <p>Guest: ${guestScore}<p>
+        </div>`
+}
+
 
 // add event listeners to buttons
 // EVENT LISTENERS
@@ -103,4 +115,6 @@ guest1Btn.addEventListener('click', add1Guest);
 guest2Btn.addEventListener('click', add2Guest);
 guest3Btn.addEventListener('click', add3Guest);
 
-resetBtn.addEventListener('click', resetScore);
+resetBtn.addEventListener('click', resetScores);
+
+saveBtn.addEventListener('click', saveScores);
