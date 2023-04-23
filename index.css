@@ -64,7 +64,7 @@ h2 {
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
     max-width: 80%;
-    margin: 0 auto;
+    margin: 0 auto 20px auto;
     color: #1B244A;
     font-family: 'Cursed Timer ULiL', sans-serif;
     text-align: center;
