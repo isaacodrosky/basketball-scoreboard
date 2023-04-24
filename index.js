@@ -18,13 +18,6 @@ const resetBtn = document.getElementById('reset-btn');
 const saveBtn = document.getElementById('save-btn');
 // previous scores display div
 const prevScores = document.getElementById('prev-scores');
-// css style values
-const red = "#F94F6D";
-const redGlow = "0px 0px 13px rgb(249, 79, 109, 0.7)";
-const green = "#32CD32";
-const greenGlow = "0px 0px 13px rgba(50, 205, 50, 0.7)";
-const white = "#FFFFFF";
-const whiteGlow = "0px 0px 13px rgba(255, 255, 255, 0.7)";
 // score init
 let homeScore = 0
 let guestScore = 0
@@ -78,30 +71,45 @@ function resetScores() {
 
 // change css styles depending on winning team
 function checkLeader() {
-    if (homeScore > guestScore && homeScore != 0) {
-        homeScoreEl.style.color = green;
-        homeScoreEl.style.textShadow = greenGlow;
-        guestScoreEl.style.color = red;
-        guestScoreEl.style.textShadow = redGlow;
-    } else if (guestScore > homeScore && guestScore != 0) {
-        homeScoreEl.style.color = red;
-        homeScoreEl.style.textShadow = redGlow;
-        guestScoreEl.style.color = green;
-        guestScoreEl.style.textShadow = greenGlow;
+    if (homeScore > guestScore) {
+        homeScoreEl.classList.add("winning");
+        homeScoreEl.classList.remove("losing");
+        guestScoreEl.classList.add("losing");
+        guestScoreEl.classList.remove("winning");
+    } else if (guestScore > homeScore) {
+        homeScoreEl.classList.remove("winning");
+        homeScoreEl.classList.add("losing");
+        guestScoreEl.classList.remove("losing");
+        guestScoreEl.classList.add("winning");
     } else {
-        homeScoreEl.style.color = white;
-        homeScoreEl.style.textShadow = whiteGlow;
-        guestScoreEl.style.color = white;
-        guestScoreEl.style.textShadow = whiteGlow;
+        homeScoreEl.classList.remove("winning");
+        homeScoreEl.classList.remove("losing");
+        guestScoreEl.classList.remove("winning");
+        guestScoreEl.classList.remove("losing");
     }
 }
 
 function saveScores() {
-    prevScores.innerHTML += `
+    if (homeScore > guestScore) {
+        prevScores.innerHTML += `
+        <div class="saved-game">
+            <p class="winning">Home: ${homeScore}</p>
+            <p class="losing">Away: ${guestScore}<p>
+        </div>`
+    } else if (guestScore > homeScore) {
+        prevScores.innerHTML += `
+        <div class="saved-game">
+            <p class="losing">Home: ${homeScore}</p>
+            <p class="winning">Away: ${guestScore}<p>
+        </div>`
+    } else {
+        prevScores.innerHTML += `
         <div class="saved-game">
             <p>Home: ${homeScore}</p>
-            <p>Guest: ${guestScore}<p>
+            <p>Away: ${guestScore}<p>
         </div>`
+    }
+     
 }
 
 
